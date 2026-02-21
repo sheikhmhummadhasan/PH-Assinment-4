@@ -14,7 +14,7 @@ let card_reject_btn = document.querySelectorAll(".reject")
 let apply_or_notapply = document.querySelectorAll(".work-of-js")
 let sec_box2 = document.querySelector(".sec-box2")
 let card1 = document.querySelectorAll(".card1")
-
+console.log(card1)
 
 
 dustbin_btn.forEach((btn) =>{
@@ -73,7 +73,7 @@ card_interview_btn.forEach((int) =>{
         apply_or_notapply.forEach((apply) => {
             apply.target.classList.add("inter")
         })
-        sec_box2.style.display = "none"
+        sec_box2.prepend(card1)
     })
 
 })
