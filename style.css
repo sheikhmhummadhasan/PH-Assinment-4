@@ -187,6 +187,9 @@ header{
     color: #323b49;
 }
 
+.sec-box2-item{
+    display: none;
+}
 .display-hide{
     display: none !important;
 }

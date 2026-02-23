@@ -258,29 +258,41 @@ function randerinterview() {
 
     sec_2.innerHTML = "";
 
-    for (let inter of total_interview_list) {
-
-        let div = document.createElement("div");
-
-        div.className = "card1";
-
-        div.innerHTML = `
-        <h2 class="companyName">${inter.companyName}</h2>
-        <p class="position">${inter.position}</p>
-        <p class="location">${inter.location}</p>
-        <div class="work-of-js" style="background-color: green; color: white;">INTERVIEW</div>
-        <p class="discription">${inter.discription}</p>
-        <div class="card-btn-box">
-            <div class="child-of-card-box">
-                <button class="interview">Interview</button>
-                <button class="reject">Reject</button>
+     if (total_interview_list.length === 0) {
+        sec_2.innerHTML = `
+            <div class="sec-box2-alrt">
+                <i class="ri-file-warning-fill"></i>
+                <h2>No jobs available</h2>
+                <p>Check back soon for new job opportunities</p>
             </div>
-        </div>
-        ${inter.i}
         `;
-
-        sec_2.appendChild(div);
+    } else{
+        
+        for (let inter of total_interview_list) {
+    
+            let div = document.createElement("div");
+    
+            div.className = "card1";
+    
+            div.innerHTML = `
+            <h2 class="companyName">${inter.companyName}</h2>
+            <p class="position">${inter.position}</p>
+            <p class="location">${inter.location}</p>
+            <div class="work-of-js" style="background-color: green; color: white;">INTERVIEW</div>
+            <p class="discription">${inter.discription}</p>
+            <div class="card-btn-box">
+                <div class="child-of-card-box">
+                    <button class="interview">Interview</button>
+                    <button class="reject">Reject</button>
+                </div>
+            </div>
+            ${inter.i}
+            `;
+    
+            sec_2.appendChild(div);
+        }
     }
+
 }
 
 
@@ -290,27 +302,39 @@ function randerreject() {
 
     sec_2.innerHTML = "";
 
-    for (let rej of total_reject_list) {
-
-        let div = document.createElement("div");
-
-        div.className = "card1";
-
-        div.innerHTML = `
-        <h2 class="companyName">${rej.companyName}</h2>
-        <p class="position">${rej.position}</p>
-        <p class="location">${rej.location}</p>
-        <div class="work-of-js" style="background-color: red; color: white;">REJECT</div>
-        <p class="discription">${rej.discription}</p>
-        <div class="card-btn-box">
-            <div class="child-of-card-box">
-                <button class="interview">Interview</button>
-                <button class="reject">Reject</button>
+    if (total_reject_list.length === 0) {
+        sec_2.innerHTML = `
+            <div class="sec-box2-alrt">
+                <i class="ri-file-warning-fill"></i>
+                <h2>No jobs available</h2>
+                <p>Check back soon for new job opportunities</p>
             </div>
-        </div>
-        ${rej.i}
         `;
+    }else{
 
-        sec_2.appendChild(div);
+        for (let rej of total_reject_list) {
+    
+            let div = document.createElement("div");
+    
+            div.className = "card1";
+    
+            div.innerHTML = `
+            <h2 class="companyName">${rej.companyName}</h2>
+            <p class="position">${rej.position}</p>
+            <p class="location">${rej.location}</p>
+            <div class="work-of-js" style="background-color: red; color: white;">REJECT</div>
+            <p class="discription">${rej.discription}</p>
+            <div class="card-btn-box">
+                <div class="child-of-card-box">
+                    <button class="interview">Interview</button>
+                    <button class="reject">Reject</button>
+                </div>
+            </div>
+            ${rej.i}
+            `;
+    
+            sec_2.appendChild(div);
+        }
     }
+
 }
