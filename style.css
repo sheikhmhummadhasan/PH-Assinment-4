@@ -68,6 +68,15 @@ header{
     display: flex;
     gap: 20px;
 }
+.btn-all-3{
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #535456;
+    color: #ffffff;
+    font-size: 1.1rem;
+    margin-top: 20px;
+}
 .btn-all{
     padding: 10px;
     border-radius: 5px;
@@ -76,6 +85,12 @@ header{
     color: #ffff;
     font-size: 1.1rem;
     margin-top: 20px;
+}
+.sec-box1{
+    margin: 0px auto;
+    /* background-color: #3B82F6; */
+    padding: 20px;
+    max-width: 1280px;
 }
 
 /* card */
@@ -144,15 +159,12 @@ header{
     margin-top: 10px;
     font-weight: 600;
 }
-.hov:active{
-    background-color: #0780e369;
-}
 
 .sec-2{
     max-width: 1280px;
     margin: 0px auto;
     padding: 30px;
-    display: none;
+    /* display: none; */
 }
 .sec-box2-item{
     height: 400px;
@@ -175,26 +187,13 @@ header{
     color: #323b49;
 }
 
-.none-for-sec1{
-    display: none;
+.display-hide{
+    display: none !important;
 }
-.none-for-sec2{
-    display: none;
-}
-
-.inter{
-    padding: 13px 25px;
-    border: 2px solid #2bc608;
-    color: #2bc608;
-    background: none;
-    border-radius: 10px;
-}
-.rej{
-    padding: 13px 25px;
-    border: 2px solid #d90808;
-    color: #d90808;
-    background: none;
-    border-radius: 10px;
+.status{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .card1{
         box-shadow: 0px 0px 10px #323b4953;

@@ -18,7 +18,7 @@
         <div class="box-2">
             <div class="item1">
                 <p>Total</p>
-                <h3>8</h3>
+                <h3>0</h3>
             </div>
             <div class="item2">
                 <p>Interview</p>
@@ -30,23 +30,27 @@
             </div>
         </div>
     </header>
-    <!-- scrtion -->
-     <section class="sec-1">
-        <div class="sec-box1">
+    <!-- hero -->
+    <div class="sec-box1">
+        <div class="status">
             <h2>Available Jobs</h2>
-            <div class="fecuter-btn">
-                <button class="btn-all hov all">ALL</button>
-                <button class="btn-all hov Interview">Interview</button>
-                <button class="btn-all hov Reject">Reject</button>
-            </div>
+            <h3><span>0</span> Jobs</h3>
         </div>
+        <div class="fecuter-btn">
+            <button onclick="togglestyle('all')" class="btn-all hov all">ALL</button>
+            <button onclick="togglestyle('Interview')" class="btn-all-3 hov Interview">Interview</button>
+            <button onclick="togglestyle('Reject')" class="btn-all-3 hov Reject">Reject</button>
+        </div>
+    </div>
+    <!-- section-1 -->
+     <section class="sec-1">
         <div class="sec-box2">
-            <div class="card1 card-1">
-                <h2>Mobile First Corp</h2>
-                <p>React Native Developer</p>
-                <p>Remote • Full-time • $130,000 - $175,000</p>
+            <div class="card1 card-1 jobcard">
+                <h2 class="companyName">Mobile First Corp</h2>
+                <p class="position">React Native Developer</p>
+                <p class="location">Remote • Full-time • $130,000 - $175,000</p>
                 <div class="work-of-js">NOT APPLIED</div>
-                <p>Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                <p class="discription">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
                 <div class="card-btn-box">
                     <div class="child-of-card-box">
                         <button class="interview">Interview</button>
@@ -56,12 +60,12 @@
                 <i class="ri-delete-bin-line"></i>
             </div>
             <!-- 2 -->
-            <div class="card1 card-2">
-                <h2>WebFlow Agency</h2>
-                <p>Web Designer & Developer</p>
-                <p>Los Angeles, CA • Part-time • $80,000 - $120,000</p>
+            <div class="card1 card-2 jobcard">
+                <h2 class="companyName">WebFlow Agency</h2>
+                <p class="position">Web Designer & Developer</p>
+                <p class="location">Los Angeles, CA • Part-time • $80,000 - $120,000</p>
                 <div class="work-of-js">NOT APPLIED</div>
-                <p>Create stunning web experiences for high-profile clients. Must have portfolio and experience with modern web design trends.</p>
+                <p class="discription">Create stunning web experiences for high-profile clients. Must have portfolio and experience with modern web design trends.</p>
                 <div class="card-btn-box">
                     <div class="child-of-card-box">
                         <button class="interview">Interview</button>
@@ -71,12 +75,12 @@
                 <i class="ri-delete-bin-line"></i>
             </div>
             <!-- 3 -->
-            <div class="card1 card-3">
-                <h2>DataViz Solutions</h2>
-                <p>Data Visualization Specialist</p>
-                <p>Boston, MA • Full-time • $125,000 - $165,000</p>
+            <div class="card1 card-3 jobcard">
+                <h2 class="companyName">DataViz Solutions</h2>
+                <p class="position">Data Visualization Specialist</p>
+                <p class="location">Boston, MA • Full-time • $125,000 - $165,000</p>
                 <div class="work-of-js">NOT APPLIED</div>
-                <p>Transform complex data into compelling visualizations. Required skills: D3.js, React, and strong analytical thinking.</p>
+                <p class="discription">Transform complex data into compelling visualizations. Required skills: D3.js, React, and strong analytical thinking.</p>
                 <div class="card-btn-box">
                     <div class="child-of-card-box">
                         <button class="interview">Interview</button>
@@ -87,11 +91,11 @@
             </div>
             <!-- 4 -->
             <div class="card1 card-4">
-                <h2>Mobile First Corp</h2>
-                <p>React Native Developer</p>
-                <p>Remote • Full-time • $130,000 - $175,000</p>
+                <h2 class="companyName">First Corp.LTD</h2>
+                <p class="position">React Native Developer</p>
+                <p class="location">Remote • Full-time • $130,000 - $175,000</p>
                 <div class="work-of-js">NOT APPLIED</div>
-                <p>Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
+                <p class="discription">Build cross-platform mobile applications using React Native. Work on products used by millions of users worldwide.</p>
                 <div class="card-btn-box">
                     <div class="child-of-card-box">
                         <button class="interview">Interview</button>
@@ -102,11 +106,11 @@
             </div>
             <!-- 5 -->
             <div class="card1 card-5">
-                <h2>Innovation Labs</h2>
-                <p>UI/UX Engineer</p>
-                <p>Austin, TX • Full-time • $110,000 - $150,000</p>
+                <h2 class="companyName">Innovation Labs</h2>
+                <p class="position">UI/UX Engineer</p>
+                <p class="location">Austin, TX • Full-time • $110,000 - $150,000</p>
                 <div class="work-of-js">NOT APPLIED</div>
-                <p>Create beautiful and functional user interfaces for our suite of products. Strong design skills and frontend development expertise required.</p>
+                <p class="discription">Create beautiful and functional user interfaces for our suite of products. Strong design skills and frontend development expertise required.</p>
                 <div class="card-btn-box">
                     <div class="child-of-card-box">
                         <button class="interview">Interview</button>
@@ -117,11 +121,11 @@
             </div>
             <!-- 6 -->
             <div class="card1 card-6">
-                <h2>MegaCorp Solutions</h2>
-                <p>JavaScript Developer</p>
-                <p>New York, NY • Full-time • $130,000 - $170,00</p>
+                <h2 class="companyName">MegaCorp Solutions</h2>
+                <p class="position">JavaScript Developer</p>
+                <p class="location">New York, NY • Full-time • $130,000 - $170,00</p>
                 <div class="work-of-js">NOT APPLIED</div>
-                <p>Build enterprise applications with JavaScript and modern frameworks. We offer competitive compensation, health insurance, and professional development opportunities.</p>
+                <p class="discription">Build enterprise applications with JavaScript and modern frameworks. We offer competitive compensation, health insurance, and professional development opportunities.</p>
                 <div class="card-btn-box">
                     <div class="child-of-card-box">
                         <button class="interview">Interview</button>
@@ -132,11 +136,11 @@
             </div>
             <!-- 7 -->
             <div class="card1 card-7">
-                <h2>StartupXYZ</h2>
-                <p>Full Stack Engineer</p>
-                <p>Remote • Full-time • $120,000 - $160,000</p>
+                <h2 class="companyName">StartupXYZ</h2>
+                <p class="position">Full Stack Engineer</p>
+                <p class="location">Remote • Full-time • $120,000 - $160,000</p>
                 <div class="work-of-js">NOT APPLIED</div>
-                <p>Join our fast-growing startup and work on our core platform. Experience with Node.js and React required. Great benefits and equity package included.</p>
+                <p class="discription">Join our fast-growing startup and work on our core platform. Experience with Node.js and React required. Great benefits and equity package included.</p>
                 <div class="card-btn-box">
                     <div class="child-of-card-box">
                         <button class="interview">Interview</button>
@@ -147,11 +151,11 @@
             </div>
             <!-- 8 -->
             <div class="card1 card-8">
-                <h2>TechCorp Industries</h2>
-                <p>Senior Frontend Developer</p>
-                <p>San Francisco, CA • Full-time • $130,000 - $175,000</p>
+                <h2 class="companyName">TechCorp Industries</h2>
+                <p class="position">Senior Frontend Developer</p>
+                <p class="location">San Francisco, CA • Full-time • $130,000 - $175,000</p>
                 <div class="work-of-js">NOT APPLIED</div>
-                <p>We are looking for an experienced Frontend Developer to build scalable web applications using React and TypeScript. You will work with a talented team on cutting-edge projects.</p>
+                <p class="discription">We are looking for an experienced Frontend Developer to build scalable web applications using React and TypeScript. You will work with a talented team on cutting-edge projects.</p>
                 <div class="card-btn-box">
                     <div class="child-of-card-box">
                         <button class="interview">Interview</button>
@@ -162,15 +166,8 @@
             </div>
         </div>
      </section>
+     <!-- section-2 -->
      <section class="sec-2">
-        <div class="sec-box1">
-            <h2>Available Jobs</h2>
-            <div class="fecuter-btn">
-                <button class="btn-all hov alll">ALL</button>
-                <button class="btn-all hov Intervieww">Interview</button>
-                <button class="btn-all hov Rejectt">Reject</button>
-            </div>
-        </div>
         <div class="sec-box2-item">
             <div class="sec-box2">
                 <div class="sec-box2-alrt">

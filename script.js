@@ -1,92 +1,308 @@
-let all = document.querySelector(".all")
-let alll = document.querySelector(".alll")
-let interviewbtnclick = document.querySelector(".Interview");
-let interviewwbtnclick = document.querySelector(".Intervieww");
-let rejectbtnclick = document.querySelector(".Reject");
-let rejecttbtnclick = document.querySelector(".Rejectt");
-let shows_interview = document.querySelector(".item2 h3");
-let shows_reject = document.querySelector(".item3 h3");
-let show_sec_2 = document.querySelector(".sec-2");
-let show_sec_1 = document.querySelector(".sec-1")
-let dustbin_btn = document.querySelectorAll(".card1 i")
-let card_interview_btn = document.querySelectorAll(".interview")
-let card_reject_btn = document.querySelectorAll(".reject")
-let apply_or_notapply = document.querySelectorAll(".work-of-js")
-let sec_box2 = document.querySelector(".sec-box2")
-let card1 = document.querySelectorAll(".card1")
-console.log(card1)
+let total_interview_list = [];
+let total_reject_list = [];
+
+let total = document.querySelector(".item1 h3");
+let total_interview = document.querySelector(".item2 h3");
+let total_reject = document.querySelector(".item3 h3");
+
+let sec_box2 = document.querySelector(".sec-box2");
+let sec_1 = document.querySelector(".sec-1");
+let sec_2 = document.querySelector(".sec-2");
+
+let allBtn = document.querySelector(".all");
+let InterviewBtn = document.querySelector(".Interview");
+let RejectBtn = document.querySelector(".Reject");
+let status = document.querySelector(".status h3 span");
+
+function calclute() {
+    total.innerText = sec_box2.children.length;
+    status.innerText = sec_box2.children.length;
+    total_interview.innerText = total_interview_list.length;
+    total_reject.innerText = total_reject_list.length;
+}
+calclute();
 
 
-dustbin_btn.forEach((btn) =>{
-    btn.addEventListener("click",() =>{
-        btn.parentElement.style.display="none"
-    })
-})
+// toggle buttons
+function togglestyle(e) {
 
-let scor_interview = 0;
-let scor_reject = 0;
+    allBtn.classList.remove("btn-all");
+    InterviewBtn.classList.remove("btn-all");
+    RejectBtn.classList.remove("btn-all");
 
-all.addEventListener("click",()=>{
-    show_sec_1.style.display = "block"
-    show_sec_2.style.display = "none"
-    console.log("clicket all btn")
+    allBtn.classList.add("btn-all-3");
+    InterviewBtn.classList.add("btn-all-3");
+    RejectBtn.classList.add("btn-all-3");
+
+    let getclass = document.querySelector("." + e);
+
+    getclass.classList.remove("btn-all-3");
+    getclass.classList.add("btn-all");
+
+    if (e === "all") {
+        sec_1.classList.remove("display-hide");
+        sec_2.classList.add("display-hide");
+    }
+
+    else if (e === "Interview") {
+        sec_1.classList.add("display-hide");
+        sec_2.classList.remove("display-hide");
+        randerinterview();
+    }
+
+    else if (e === "Reject") {
+        sec_1.classList.add("display-hide");
+        sec_2.classList.remove("display-hide");
+        randerreject();
+    }
+}
+
+
+// section 1 click
+sec_1.addEventListener("click", (e) => {
+
+    let parentnode = e.target.closest(".card1");
+
+    if (!parentnode) return;
+
+    let companyName = parentnode.querySelector(".companyName").innerText;
+
+    let allValue = {
+        companyName: companyName,
+        position: parentnode.querySelector(".position").innerText,
+        location: parentnode.querySelector(".location").innerText,
+        work_of_js: "",
+        discription: parentnode.querySelector(".discription").innerText,
+        interview: "Interview",
+        reject: "Reject",
+        i: '<i class="ri-delete-bin-line"></i>'
+    };
+
+
+    //interview click
+    if (e.target.classList.contains("interview")) {
+
+        // remove from reject list
+        total_reject_list = total_reject_list.filter(
+            item => item.companyName !== companyName
+        );
+
+        allValue.work_of_js = "INTERVIEW";
+
+        let elem = parentnode.querySelector(".work-of-js");
+
+        elem.innerText = "INTERVIEW";
+        elem.style.backgroundColor = "green";
+        elem.style.color = "white";
+
+        if (!total_interview_list.find(
+            item => item.companyName === companyName
+        )) {
+            total_interview_list.push(allValue);
+        }
+
+        calclute();
+    }
+
+
+    // reject click
+    if (e.target.classList.contains("reject")) {
+
+        // remove from interview list
+        total_interview_list = total_interview_list.filter(
+            item => item.companyName !== companyName
+        );
+
+        allValue.work_of_js = "REJECT";
+
+        let elem = parentnode.querySelector(".work-of-js");
+
+        elem.innerText = "REJECT";
+        elem.style.backgroundColor = "red";
+        elem.style.color = "white";
+
+        if (!total_reject_list.find(
+            item => item.companyName === companyName
+        )) {
+            total_reject_list.push(allValue);
+        }
+
+        calclute();
+    }
+
+
+    // delete click
+    if (e.target.classList.contains("ri-delete-bin-line")) {
+
+        parentnode.remove();
+
+        total_interview_list = total_interview_list.filter(
+            item => item.companyName !== companyName
+        );
+
+        total_reject_list = total_reject_list.filter(
+            item => item.companyName !== companyName
+        );
+
+        calclute();
+
+        if (InterviewBtn.classList.contains("btn-all")) {
+            randerinterview();
+        }
+
+        if (RejectBtn.classList.contains("btn-all")) {
+            randerreject();
+        }
+    }
+
 });
 
-interviewbtnclick.addEventListener("click",()=>{
-    show_sec_1.style.display = "none"
-    show_sec_2.style.display = "block"
-    console.log("clicked interview btn")
+
+
+// section 2 click
+sec_2.addEventListener("click", (e) => {
+
+    let parentnode = e.target.closest(".card1");
+
+    if (!parentnode) return;
+
+    let companyName = parentnode.querySelector(".companyName").innerText;
+
+    let allValue = {
+        companyName: companyName,
+        position: parentnode.querySelector(".position").innerText,
+        location: parentnode.querySelector(".location").innerText,
+        work_of_js: "",
+        discription: parentnode.querySelector(".discription").innerText,
+        interview: "Interview",
+        reject: "Reject",
+        i: '<i class="ri-delete-bin-line"></i>'
+    };
+
+
+    // interview click
+    if (e.target.classList.contains("interview")) {
+
+        total_reject_list = total_reject_list.filter(
+            item => item.companyName !== companyName
+        );
+
+        allValue.work_of_js = "INTERVIEW";
+
+        parentnode.remove();
+
+        if (!total_interview_list.find(
+            item => item.companyName === companyName
+        )) {
+            total_interview_list.push(allValue);
+        }
+
+        randerinterview();
+        calclute();
+    }
+
+
+    // reject click
+    if (e.target.classList.contains("reject")) {
+
+        total_interview_list = total_interview_list.filter(
+            item => item.companyName !== companyName
+        );
+
+        allValue.work_of_js = "REJECT";
+
+        parentnode.remove();
+
+        if (!total_reject_list.find(
+            item => item.companyName === companyName
+        )) {
+            total_reject_list.push(allValue);
+        }
+
+        randerreject();
+        calclute();
+    }
+
+
+    // delete click
+    if (e.target.classList.contains("ri-delete-bin-line")) {
+
+        parentnode.remove();
+
+        total_interview_list = total_interview_list.filter(
+            item => item.companyName !== companyName
+        );
+
+        total_reject_list = total_reject_list.filter(
+            item => item.companyName !== companyName
+        );
+
+        calclute();
+    }
+
 });
 
-rejectbtnclick.addEventListener("click",()=>{
-    show_sec_1.style.display = "none"
-    show_sec_2.style.display = "block"
-    console.log("click reject bntn")
-});
 
 
-alll.addEventListener("click",()=>{
-    show_sec_1.style.display = "block"
-    show_sec_2.style.display = "none"
-    console.log("clicket all btn")
-});
 
-interviewwbtnclick.addEventListener("click",()=>{
-    show_sec_1.style.display = "none"
-    show_sec_2.style.display = "block"
-    console.log("clicked interview btn")
-});
+// render interview
+function randerinterview() {
 
-rejecttbtnclick.addEventListener("click",()=>{
-    show_sec_1.style.display = "none"
-    show_sec_2.style.display = "block"
-    console.log("click reject bntn")
-});
+    sec_2.innerHTML = "";
+
+    for (let inter of total_interview_list) {
+
+        let div = document.createElement("div");
+
+        div.className = "card1";
+
+        div.innerHTML = `
+        <h2 class="companyName">${inter.companyName}</h2>
+        <p class="position">${inter.position}</p>
+        <p class="location">${inter.location}</p>
+        <div class="work-of-js" style="background-color: green; color: white;">INTERVIEW</div>
+        <p class="discription">${inter.discription}</p>
+        <div class="card-btn-box">
+            <div class="child-of-card-box">
+                <button class="interview">Interview</button>
+                <button class="reject">Reject</button>
+            </div>
+        </div>
+        ${inter.i}
+        `;
+
+        sec_2.appendChild(div);
+    }
+}
 
 
-card_interview_btn.forEach((int) =>{
-    int.addEventListener("click",() => {
-        int.parentElement.parentElement.parentElement.style.display = "none"
-        scor_interview++
-        shows_interview.innerHTML = scor_interview;
 
-        apply_or_notapply.forEach((apply) => {
-            apply.target.classList.add("inter")
-        })
-        sec_box2.prepend(card1)
-    })
+// render reject
+function randerreject() {
 
-})
+    sec_2.innerHTML = "";
 
-card_reject_btn.forEach((int) =>{
-    int.addEventListener("click",() => {
-        int.parentElement.parentElement.parentElement.style.display = "none"
-        scor_reject++
-        shows_reject.innerHTML = scor_reject;
+    for (let rej of total_reject_list) {
 
-        apply_or_notapply.forEach((apply) => {
-            apply.traget.classList.add("rej")
-        })
-    })
+        let div = document.createElement("div");
 
-})
+        div.className = "card1";
+
+        div.innerHTML = `
+        <h2 class="companyName">${rej.companyName}</h2>
+        <p class="position">${rej.position}</p>
+        <p class="location">${rej.location}</p>
+        <div class="work-of-js" style="background-color: red; color: white;">REJECT</div>
+        <p class="discription">${rej.discription}</p>
+        <div class="card-btn-box">
+            <div class="child-of-card-box">
+                <button class="interview">Interview</button>
+                <button class="reject">Reject</button>
+            </div>
+        </div>
+        ${rej.i}
+        `;
+
+        sec_2.appendChild(div);
+    }
+}
