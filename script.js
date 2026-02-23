@@ -1,5 +1,5 @@
 let total_interview_list = [];
-let total_reject_list = [];
+let total_reject_list = []; 
 
 let total = document.querySelector(".item1 h3");
 let total_interview = document.querySelector(".item2 h3");
@@ -22,10 +22,16 @@ function calclute() {
 }
 calclute();
 
+InterviewBtn.addEventListener("click",()=>{
+    status.innerHTML = `${total_interview_list.length}`
+})
+RejectBtn.addEventListener("click",()=>{
+    status.innerHTML = `${total_reject_list.length}`
+})
 
 // toggle buttons
 function togglestyle(e) {
-
+    
     allBtn.classList.remove("btn-all");
     InterviewBtn.classList.remove("btn-all");
     RejectBtn.classList.remove("btn-all");
@@ -40,23 +46,25 @@ function togglestyle(e) {
     getclass.classList.add("btn-all");
 
     if (e === "all") {
+        currentTab = "all"
         sec_1.classList.remove("display-hide");
         sec_2.classList.add("display-hide");
     }
 
     else if (e === "Interview") {
+        currentTab = "Interview"
         sec_1.classList.add("display-hide");
         sec_2.classList.remove("display-hide");
         randerinterview();
     }
 
     else if (e === "Reject") {
+        currentTab = "Reject";
         sec_1.classList.add("display-hide");
         sec_2.classList.remove("display-hide");
         randerreject();
     }
 }
-
 
 // section 1 click
 sec_1.addEventListener("click", (e) => {
