@@ -23,12 +23,12 @@ function calclute() {
 }
 calclute();
 
-// InterviewBtn.addEventListener("click",()=>{
-//     status.innerHTML = `${total_interview_list.length}`
-// })
-// RejectBtn.addEventListener("click",()=>{
-//     status.innerHTML = `${total_reject_list.length}`
-// })
+InterviewBtn.addEventListener("click",()=>{
+    status.innerHTML = `${total_interview_list.length}`
+})
+RejectBtn.addEventListener("click",()=>{
+    status.innerHTML = `${total_reject_list.length}`
+})
 
 // toggle buttons
 function togglestyle(e) {
@@ -121,7 +121,7 @@ sec_1.addEventListener("click", (e) => {
     if (e.target.classList.contains("reject")) {
 
         togglestyle('Reject');
-        
+
         // remove from interview list
         total_interview_list = total_interview_list.filter(
             item => item.companyName !== companyName

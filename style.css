@@ -186,6 +186,11 @@ header{
 .sec-box2-alrt p{
     color: #323b49;
 }
+.sec-box2-alrt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .sec-box2-item{
     display: none;
