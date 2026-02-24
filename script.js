@@ -1,3 +1,4 @@
+let currentTab = "all";
 let total_interview_list = [];
 let total_reject_list = []; 
 
@@ -22,16 +23,16 @@ function calclute() {
 }
 calclute();
 
-InterviewBtn.addEventListener("click",()=>{
-    status.innerHTML = `${total_interview_list.length}`
-})
-RejectBtn.addEventListener("click",()=>{
-    status.innerHTML = `${total_reject_list.length}`
-})
+// InterviewBtn.addEventListener("click",()=>{
+//     status.innerHTML = `${total_interview_list.length}`
+// })
+// RejectBtn.addEventListener("click",()=>{
+//     status.innerHTML = `${total_reject_list.length}`
+// })
 
 // toggle buttons
 function togglestyle(e) {
-    
+
     allBtn.classList.remove("btn-all");
     InterviewBtn.classList.remove("btn-all");
     RejectBtn.classList.remove("btn-all");
@@ -71,7 +72,7 @@ sec_1.addEventListener("click", (e) => {
 
     let parentnode = e.target.closest(".card1");
 
-    if (!parentnode) return;
+    // if (!parentnode) return;
 
     let companyName = parentnode.querySelector(".companyName").innerText;
 
@@ -86,9 +87,10 @@ sec_1.addEventListener("click", (e) => {
         i: '<i class="ri-delete-bin-line"></i>'
     };
 
-
     //interview click
     if (e.target.classList.contains("interview")) {
+
+        togglestyle('Interview')
 
         // remove from reject list
         total_reject_list = total_reject_list.filter(
@@ -110,12 +112,16 @@ sec_1.addEventListener("click", (e) => {
         }
 
         calclute();
+        randerinterview()
+        
     }
 
 
     // reject click
     if (e.target.classList.contains("reject")) {
 
+        togglestyle('Reject');
+        
         // remove from interview list
         total_interview_list = total_interview_list.filter(
             item => item.companyName !== companyName
@@ -136,6 +142,8 @@ sec_1.addEventListener("click", (e) => {
         }
 
         calclute();
+        randerreject()
+        
     }
 
 
@@ -172,7 +180,7 @@ sec_2.addEventListener("click", (e) => {
 
     let parentnode = e.target.closest(".card1");
 
-    if (!parentnode) return;
+    // if (!parentnode) return;
 
     let companyName = parentnode.querySelector(".companyName").innerText;
 
@@ -190,7 +198,7 @@ sec_2.addEventListener("click", (e) => {
 
     // interview click
     if (e.target.classList.contains("interview")) {
-
+        togglestyle('Interview');
         total_reject_list = total_reject_list.filter(
             item => item.companyName !== companyName
         );
@@ -212,7 +220,7 @@ sec_2.addEventListener("click", (e) => {
 
     // reject click
     if (e.target.classList.contains("reject")) {
-
+        togglestyle('Reject')
         total_interview_list = total_interview_list.filter(
             item => item.companyName !== companyName
         );
