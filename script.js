@@ -1,6 +1,6 @@
 let currentTab = "all";
 let total_interview_list = [];
-let total_reject_list = []; 
+let total_reject_list = [];
 
 let total = document.querySelector(".item1 h3");
 let total_interview = document.querySelector(".item2 h3");
@@ -14,275 +14,260 @@ let allBtn = document.querySelector(".all");
 let InterviewBtn = document.querySelector(".Interview");
 let RejectBtn = document.querySelector(".Reject");
 let status = document.querySelector(".status h3 span");
+const job_list = document.getElementById("all-list");
+const interview_list = document.getElementById("interview-list");
+const reject_list = document.getElementById("reject-list");
 
 function calclute() {
-    total.innerText = sec_box2.children.length;
-    status.innerText = sec_box2.children.length;
-    total_interview.innerText = total_interview_list.length;
-    total_reject.innerText = total_reject_list.length;
+  total.innerText = sec_box2.children.length;
+  //   status.innerText = sec_box2.children.length;
+  total_interview.innerText = total_interview_list.length;
+  total_reject.innerText = total_reject_list.length;
 }
 calclute();
 
-InterviewBtn.addEventListener("click",()=>{
-    status.innerHTML = `${total_interview_list.length}`
-})
-RejectBtn.addEventListener("click",()=>{
-    status.innerHTML = `${total_reject_list.length}`
-})
+InterviewBtn.addEventListener("click", () => {
+  status.innerHTML = `${total_interview_list.length}`;
+});
+RejectBtn.addEventListener("click", () => {
+  status.innerHTML = `${total_reject_list.length}`;
+});
 
 // toggle buttons
 function togglestyle(e) {
+  allBtn.classList.remove("btn-all");
+  InterviewBtn.classList.remove("btn-all");
+  RejectBtn.classList.remove("btn-all");
 
-    allBtn.classList.remove("btn-all");
-    InterviewBtn.classList.remove("btn-all");
-    RejectBtn.classList.remove("btn-all");
+  allBtn.classList.add("btn-all-3");
+  InterviewBtn.classList.add("btn-all-3");
+  RejectBtn.classList.add("btn-all-3");
 
-    allBtn.classList.add("btn-all-3");
-    InterviewBtn.classList.add("btn-all-3");
-    RejectBtn.classList.add("btn-all-3");
+  let getclass = document.querySelector("." + e);
 
-    let getclass = document.querySelector("." + e);
+  getclass.classList.remove("btn-all-3");
+  getclass.classList.add("btn-all");
 
-    getclass.classList.remove("btn-all-3");
-    getclass.classList.add("btn-all");
-
-    if (e === "all") {
-        currentTab = "all"
-        sec_1.classList.remove("display-hide");
-        sec_2.classList.add("display-hide");
-    }
-
-    else if (e === "Interview") {
-        currentTab = "Interview"
-        sec_1.classList.add("display-hide");
-        sec_2.classList.remove("display-hide");
-        randerinterview();
-    }
-
-    else if (e === "Reject") {
-        currentTab = "Reject";
-        sec_1.classList.add("display-hide");
-        sec_2.classList.remove("display-hide");
-        randerreject();
-    }
+  if (e === "all") {
+    currentTab = "all";
+    sec_1.classList.remove("display-hide");
+    sec_2.classList.add("display-hide");
+    showCount("all");
+  } else if (e === "Interview") {
+    currentTab = "Interview";
+    sec_1.classList.add("display-hide");
+    sec_2.classList.remove("display-hide");
+    randerinterview();
+    showCount("interview");
+  } else if (e === "Reject") {
+    currentTab = "Reject";
+    sec_1.classList.add("display-hide");
+    sec_2.classList.remove("display-hide");
+    randerreject();
+    showCount("reject");
+  }
 }
 
 // section 1 click
 sec_1.addEventListener("click", (e) => {
+  let parentnode = e.target.closest(".card1");
 
-    let parentnode = e.target.closest(".card1");
+  // if (!parentnode) return;
 
-    // if (!parentnode) return;
+  let companyName = parentnode.querySelector(".companyName").innerText;
 
-    let companyName = parentnode.querySelector(".companyName").innerText;
+  let allValue = {
+    companyName: companyName,
+    position: parentnode.querySelector(".position").innerText,
+    location: parentnode.querySelector(".location").innerText,
+    work_of_js: "",
+    discription: parentnode.querySelector(".discription").innerText,
+    interview: "Interview",
+    reject: "Reject",
+    i: '<i class="ri-delete-bin-line"></i>',
+  };
 
-    let allValue = {
-        companyName: companyName,
-        position: parentnode.querySelector(".position").innerText,
-        location: parentnode.querySelector(".location").innerText,
-        work_of_js: "",
-        discription: parentnode.querySelector(".discription").innerText,
-        interview: "Interview",
-        reject: "Reject",
-        i: '<i class="ri-delete-bin-line"></i>'
-    };
+  //interview click
+  if (e.target.classList.contains("interview")) {
+    togglestyle("Interview");
 
-    //interview click
-    if (e.target.classList.contains("interview")) {
+    // remove from reject list
+    total_reject_list = total_reject_list.filter(
+      (item) => item.companyName !== companyName,
+    );
 
-        togglestyle('Interview')
+    allValue.work_of_js = "INTERVIEW";
 
-        // remove from reject list
-        total_reject_list = total_reject_list.filter(
-            item => item.companyName !== companyName
-        );
+    let elem = parentnode.querySelector(".work-of-js");
 
-        allValue.work_of_js = "INTERVIEW";
+    elem.innerText = "INTERVIEW";
+    elem.style.backgroundColor = "green";
+    elem.style.color = "white";
 
-        let elem = parentnode.querySelector(".work-of-js");
+    if (
+      !total_interview_list.find((item) => item.companyName === companyName)
+    ) {
+      total_interview_list.push(allValue);
+    }
+    showCount("interview");
 
-        elem.innerText = "INTERVIEW";
-        elem.style.backgroundColor = "green";
-        elem.style.color = "white";
+    calclute();
+    randerinterview();
+  }
 
-        if (!total_interview_list.find(
-            item => item.companyName === companyName
-        )) {
-            total_interview_list.push(allValue);
-        }
+  // reject click
+  if (e.target.classList.contains("reject")) {
+    togglestyle("Reject");
 
-        calclute();
-        randerinterview()
-        
+    // remove from interview list
+    total_interview_list = total_interview_list.filter(
+      (item) => item.companyName !== companyName,
+    );
+
+    allValue.work_of_js = "REJECT";
+
+    let elem = parentnode.querySelector(".work-of-js");
+
+    elem.innerText = "REJECT";
+    elem.style.backgroundColor = "red";
+    elem.style.color = "white";
+
+    if (!total_reject_list.find((item) => item.companyName === companyName)) {
+      total_reject_list.push(allValue);
+    }
+    reject_list.innerText = total_reject_list.length;
+    showCount("reject");
+
+    calclute();
+    randerreject();
+  }
+
+  // delete click
+  if (e.target.classList.contains("ri-delete-bin-line")) {
+    parentnode.remove();
+    console.log("deleted");
+    total_interview_list = total_interview_list.filter(
+      (item) => item.companyName !== companyName,
+    );
+
+    total_reject_list = total_reject_list.filter(
+      (item) => item.companyName !== companyName,
+    );
+
+    calclute();
+    showCount("all");
+    // showCount("reject");
+
+    if (InterviewBtn.classList.contains("btn-all")) {
+      randerinterview();
     }
 
-
-    // reject click
-    if (e.target.classList.contains("reject")) {
-
-        togglestyle('Reject');
-
-        // remove from interview list
-        total_interview_list = total_interview_list.filter(
-            item => item.companyName !== companyName
-        );
-
-        allValue.work_of_js = "REJECT";
-
-        let elem = parentnode.querySelector(".work-of-js");
-
-        elem.innerText = "REJECT";
-        elem.style.backgroundColor = "red";
-        elem.style.color = "white";
-
-        if (!total_reject_list.find(
-            item => item.companyName === companyName
-        )) {
-            total_reject_list.push(allValue);
-        }
-
-        calclute();
-        randerreject()
-        
+    if (RejectBtn.classList.contains("btn-all")) {
+      randerreject();
     }
-
-
-    // delete click
-    if (e.target.classList.contains("ri-delete-bin-line")) {
-
-        parentnode.remove();
-
-        total_interview_list = total_interview_list.filter(
-            item => item.companyName !== companyName
-        );
-
-        total_reject_list = total_reject_list.filter(
-            item => item.companyName !== companyName
-        );
-
-        calclute();
-
-        if (InterviewBtn.classList.contains("btn-all")) {
-            randerinterview();
-        }
-
-        if (RejectBtn.classList.contains("btn-all")) {
-            randerreject();
-        }
-    }
-
+  }
 });
-
-
 
 // section 2 click
 sec_2.addEventListener("click", (e) => {
+  let parentnode = e.target.closest(".card1");
 
-    let parentnode = e.target.closest(".card1");
+  // if (!parentnode) return;
 
-    // if (!parentnode) return;
+  let companyName = parentnode.querySelector(".companyName").innerText;
 
-    let companyName = parentnode.querySelector(".companyName").innerText;
+  let allValue = {
+    companyName: companyName,
+    position: parentnode.querySelector(".position").innerText,
+    location: parentnode.querySelector(".location").innerText,
+    work_of_js: "",
+    discription: parentnode.querySelector(".discription").innerText,
+    interview: "Interview",
+    reject: "Reject",
+    i: '<i class="ri-delete-bin-line"></i>',
+  };
 
-    let allValue = {
-        companyName: companyName,
-        position: parentnode.querySelector(".position").innerText,
-        location: parentnode.querySelector(".location").innerText,
-        work_of_js: "",
-        discription: parentnode.querySelector(".discription").innerText,
-        interview: "Interview",
-        reject: "Reject",
-        i: '<i class="ri-delete-bin-line"></i>'
-    };
+  // interview click
+  if (e.target.classList.contains("interview")) {
+    togglestyle("Interview");
+    total_reject_list = total_reject_list.filter(
+      (item) => item.companyName !== companyName,
+    );
 
+    allValue.work_of_js = "INTERVIEW";
 
-    // interview click
-    if (e.target.classList.contains("interview")) {
-        togglestyle('Interview');
-        total_reject_list = total_reject_list.filter(
-            item => item.companyName !== companyName
-        );
+    parentnode.remove();
 
-        allValue.work_of_js = "INTERVIEW";
-
-        parentnode.remove();
-
-        if (!total_interview_list.find(
-            item => item.companyName === companyName
-        )) {
-            total_interview_list.push(allValue);
-        }
-
-        randerinterview();
-        calclute();
+    if (
+      !total_interview_list.find((item) => item.companyName === companyName)
+    ) {
+      total_interview_list.push(allValue);
     }
+    showCount("interview");
+    randerinterview();
+    calclute();
+  }
 
+  // reject click
+  if (e.target.classList.contains("reject")) {
+    togglestyle("Reject");
+    total_interview_list = total_interview_list.filter(
+      (item) => item.companyName !== companyName,
+    );
 
-    // reject click
-    if (e.target.classList.contains("reject")) {
-        togglestyle('Reject')
-        total_interview_list = total_interview_list.filter(
-            item => item.companyName !== companyName
-        );
+    allValue.work_of_js = "REJECT";
 
-        allValue.work_of_js = "REJECT";
+    parentnode.remove();
 
-        parentnode.remove();
-
-        if (!total_reject_list.find(
-            item => item.companyName === companyName
-        )) {
-            total_reject_list.push(allValue);
-        }
-
-        randerreject();
-        calclute();
+    if (!total_reject_list.find((item) => item.companyName === companyName)) {
+      total_reject_list.push(allValue);
     }
+    showCount("reject");
+    randerreject();
+    calclute();
+  }
 
+  // delete click
+  if (e.target.classList.contains("ri-delete-bin-line")) {
+    // console.log(e.currentTarget.children.classList.contains("reject"));
 
-    // delete click
-    if (e.target.classList.contains("ri-delete-bin-line")) {
+    total_interview_list = total_interview_list.filter(
+      (item) => item.companyName !== companyName,
+    );
 
-        parentnode.remove();
-
-        total_interview_list = total_interview_list.filter(
-            item => item.companyName !== companyName
-        );
-
-        total_reject_list = total_reject_list.filter(
-            item => item.companyName !== companyName
-        );
-
-        calclute();
+    total_reject_list = total_reject_list.filter(
+      (item) => item.companyName !== companyName,
+    );
+    if (e.currentTarget.children[0].classList.contains("reject")) {
+      showCount("reject");
+    } else {
+      showCount("interview");
     }
+    parentnode.remove();
 
+    calclute();
+  }
 });
-
-
-
 
 // render interview
 function randerinterview() {
+  sec_2.innerHTML = "";
 
-    sec_2.innerHTML = "";
-
-     if (total_interview_list.length === 0) {
-        sec_2.innerHTML = `
+  if (total_interview_list.length === 0) {
+    sec_2.innerHTML = `
             <div class="sec-box2-alrt">
                 <i class="ri-file-warning-fill"></i>
                 <h2>No jobs available</h2>
                 <p>Check back soon for new job opportunities</p>
             </div>
         `;
-    } else{
-        
-        for (let inter of total_interview_list) {
-    
-            let div = document.createElement("div");
-    
-            div.className = "card1";
-    
-            div.innerHTML = `
+  } else {
+    for (let inter of total_interview_list) {
+      let div = document.createElement("div");
+
+      div.className = "card1 interview";
+
+      div.innerHTML = `
             <h2 class="companyName">${inter.companyName}</h2>
             <p class="position">${inter.position}</p>
             <p class="location">${inter.location}</p>
@@ -296,37 +281,52 @@ function randerinterview() {
             </div>
             ${inter.i}
             `;
-    
-            sec_2.appendChild(div);
-        }
-    }
 
+      sec_2.appendChild(div);
+    }
+  }
 }
 
-
+function showCount(status) {
+  if (status === "interview") {
+    interview_list.innerText = total_interview_list.length;
+    interview_list.classList.remove("display-hide");
+    reject_list.classList.add("display-hide");
+    job_list.classList.add("display-hide");
+  } else if (status === "reject") {
+    reject_list.innerText = total_reject_list.length;
+    interview_list.classList.add("display-hide");
+    reject_list.classList.remove("display-hide");
+    job_list.classList.add("display-hide");
+  } else {
+    reject_list.classList.add("display-hide");
+    interview_list.classList.add("display-hide");
+    job_list.classList.remove("display-hide");
+    job_list.innerText = sec_box2.children.length;
+  }
+}
+showCount("all");
 
 // render reject
 function randerreject() {
+  sec_2.innerHTML = "";
+  showCount("reject");
 
-    sec_2.innerHTML = "";
-
-    if (total_reject_list.length === 0) {
-        sec_2.innerHTML = `
+  if (total_reject_list.length === 0) {
+    sec_2.innerHTML = `
             <div class="sec-box2-alrt">
                 <i class="ri-file-warning-fill"></i>
                 <h2>No jobs available</h2>
                 <p>Check back soon for new job opportunities</p>
             </div>
         `;
-    }else{
+  } else {
+    for (let rej of total_reject_list) {
+      let div = document.createElement("div");
 
-        for (let rej of total_reject_list) {
-    
-            let div = document.createElement("div");
-    
-            div.className = "card1";
-    
-            div.innerHTML = `
+      div.className = "card1 reject";
+
+      div.innerHTML = `
             <h2 class="companyName">${rej.companyName}</h2>
             <p class="position">${rej.position}</p>
             <p class="location">${rej.location}</p>
@@ -340,9 +340,8 @@ function randerreject() {
             </div>
             ${rej.i}
             `;
-    
-            sec_2.appendChild(div);
-        }
-    }
 
+      sec_2.appendChild(div);
+    }
+  }
 }
